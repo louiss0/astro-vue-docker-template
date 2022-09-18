@@ -1,44 +1,48 @@
 ---
 import AstroTopFrameWorksCircle from "@/components/AstroTopFrameWorksCircle.astro";
-import Container from "@/components/Container.vue";
+import Container from "@/components/Container.astro";
+import Gap from "@/components/Gap.astro";
 import HMFLayout from "@/layouts/HMFLayout.astro";
 ---
 
 <HMFLayout title="Home">
   <Container slot="header">
-    <hgroup>
-      <h1>Introduction</h1>
-      <p>
-        Welcome to the astro and vue template made by
-        <a
-          href="https://www.twitter.com/SheltonLouisX"
-          class="hover:underline underline-offset-2"
-        >
-          Shelton Louis
-        </a>
-      </p>
-    </hgroup>
+    <h1>This is the astro template</h1>
 
+    <Gap spaces={3} />
     <p>
-      This section is the section that is supposed to introductory content like
-      a hero section. I call this layout the <abbr
-        title="Header Main and Footer Layout"
-        class="underline-offset-2">HMFLayout</abbr
-      >
+      This template is designed with the TailwindCSS intergration. Vue installed
+      and has a few basic utility components to use. The styles will be found in
+      the base layout component.
+
+      <br />
+      Go to the readme for more information.
     </p>
+
+    <div class="text-xl text-red-400">
+      Please remember to use the containers with the slot's provided for content
+    </div>
   </Container>
+
   <Container slot="main">
     <p>
-      This is the main slot for this site your sections all live inside of this
-      area. The footer section contains the circle that hides icons of the
-      frameworks not used by this template. You can type in more frameworks
-      under the revealedFrameworks prop. You'll se what they are by using
-      <kbd>ctrl</kbd>
-      <span>+</span>
-      <kbd>space</kbd>
+      If you want to either remove or add a framework go to the HMFLayout in
+      order to change the component framework.
     </p>
+    <strong>Your options are.</strong>
+
+    <ul class="grid gap-2" role="list">
+      <li>React</li>
+      <li>Vue</li>
+      <li>Angular</li>
+      <li>Svelte</li>
+      <li>Solid</li>
+    </ul>
   </Container>
-  <Container slot="footer" class="w-3/5 grid place-items-center">
-    <AstroTopFrameWorksCircle revealedFrameworks={["vue"]} />
+
+  <Container slot="footer">
+    <div class="grid place-items-center">
+      <AstroTopFrameWorksCircle revealedFrameworks={["vue"]} />
+    </div>
   </Container>
 </HMFLayout>

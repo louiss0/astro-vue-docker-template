@@ -9,16 +9,14 @@ import HtmlDirectives from "remark-html-directives";
 
 // https://astro.build/config
 export default defineConfig({
-  markdown: {
-    remarkPlugins: ["remark-directive", HtmlDirectives],
-  },
+  
   integrations: [tailwind(), vue()],
   server: {
     host: true,
   },
   vite: {
     plugins: [
-      vueJSX()
+      vueJSX({enableObjectSlots: true, })
     ],
     resolve: {
       alias: {

@@ -1,5 +1,5 @@
 # Astro Docker Template 
-
+git 
 
 This template is a template that contains two main folders the app folder and the dockerfile. 
 
@@ -67,9 +67,7 @@ content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 ```ts 
 
 export default defineConfig({
-  markdown: {
-    remarkPlugins: ["remark-directive", HtmlDirectives],
-  },
+
   integrations: [tailwind(), vue()],
   server: {
     host: true,
@@ -94,16 +92,6 @@ export default defineConfig({
 
 ```
 
-- The `"remark-directive"` plugin enables the use of markdown html directives. `HtmlDirectives` is the one that creates html for astro to use 
-
-- The `host: true` is make sure localhost can access the server via docker 
-
-- `alias:{ "@": "/src" }` allows the use of using `@` to access modules instead of using relative paths 
-
-- `external: ["svgo"]` allows you to use astro icon in order to process icons from a huge set of icon sources
-
-- `watch: { usePolling: true,},` allows vite to watch files that have changed inside of docker. 
-    - The server will not reload if you erase this   
 
 
 ### Ts Config
