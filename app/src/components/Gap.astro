@@ -20,7 +20,9 @@ const { spaces, color = "" } = Astro.props;
 ---
 
 <script>
-  const gaps = document.querySelectorAll<HTMLElement>("[data-id='gap']")!;
+  const dataGapSelector = "[data-id='gap']";
+
+  const gaps = document.querySelectorAll<HTMLElement>(dataGapSelector)!;
 
   gaps.forEach(function (gap) {
     const [spaces, color] = [
@@ -34,14 +36,23 @@ const { spaces, color = "" } = Astro.props;
 
     const { nextElementSibling, previousElementSibling } = gap;
 
-    gap.dataset.id = `gap${Math.ceil(Math.random() * Date.now())}`;
+    gap.setAttribute("data-id", `gap${Math.ceil(Math.random() * Date.now())}`);
 
     throwErrorIfThereisNoPreviousElement(
       previousElementSibling,
-      gap.dataset.id
+      gap.dataset.id as string
     );
 
-    throwErrorIfThereisNoNextElement(nextElementSibling, gap.dataset.id);
+    throwErrorIfThereisNoNextElement(
+      nextElementSibling,
+      gap.dataset.id as string
+    );
+
+    throwErrorIfAPreviousElementSiblingOrANextElementSiblingHasADataId(
+      previousElementSibling,
+      gap,
+      nextElementSibling
+    );
 
     const previousElementSiblingStyle = getComputedStyle(
       previousElementSibling
@@ -170,6 +181,29 @@ const { spaces, color = "" } = Astro.props;
   ) {
     if (!previousElementSibling) {
       throw new Error(`A gap must exist between two elements check for ${id} `);
+    }
+  }
+
+  function throwErrorIfAPreviousElementSiblingOrANextElementSiblingHasADataId(
+    previousElementSibling: Element,
+    element: Element,
+    nextElementSibling: Element
+  ) {
+    const previousElementOrNextElementHasADataIdOfGap =
+      previousElementSibling.hasAttribute("data-id") ||
+      nextElementSibling.hasAttribute("data-id");
+
+    const previousElementSiblingDataId =
+      previousElementSibling.getAttribute("data-id");
+
+    const elementDataId = element.getAttribute("data-id");
+
+    const nextElementSiblingDataId = nextElementSibling.getAttribute("data-id");
+
+    if (previousElementOrNextElementHasADataIdOfGap) {
+      throw new Error(
+        `Two gaps cannot exist between each other , Check for these id's  ${previousElementSiblingDataId} ${elementDataId} ${nextElementSiblingDataId} `
+      );
     }
   }
 </script>
