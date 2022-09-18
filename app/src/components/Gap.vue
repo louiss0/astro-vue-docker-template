@@ -13,15 +13,21 @@ const gapRef = shallowRef<HTMLDivElement | null>(null);
 const id = `gap${Math.ceil(Math.random() * Date.now())}`;
 
 onMounted(() => {
-  const parentElement = gapRef?.value?.parentElement;
+  let parentElement = gapRef?.value?.parentElement;
 
   if (!parentElement) return;
-
-  const parentElementStyle = getComputedStyle(parentElement);
 
   const { value: element } = gapRef;
 
   if (!element) return;
+
+  if (parentElement.nodeName === "ASTRO-ISLAND") {
+    parentElement = parentElement.parentElement;
+  }
+
+  if (!parentElement) return;
+
+  const parentElementStyle = getComputedStyle(parentElement);
 
   changeElementWidthIfTheParentElementFulfilsTheseCOnditions(
     parentElementStyle,
