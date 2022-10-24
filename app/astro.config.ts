@@ -3,24 +3,27 @@ import tailwind from "@astrojs/tailwind";
 
 import vue from "@astrojs/vue";
 
-import vueJSX from  "@vitejs/plugin-vue-jsx";
 
-import HtmlDirectives from "remark-html-directives";
 
 // https://astro.build/config
 export default defineConfig({
   
-  integrations: [tailwind(), vue()],
+  integrations: [tailwind(), vue(
+    {
+      appEntrypoint: "/src/bootstrap",
+      jsx: {
+        enableObjectSlots:true,
+    }}
+  )],
   server: {
     host: true,
   },
   vite: {
     plugins: [
-      vueJSX({enableObjectSlots: true, })
     ],
     resolve: {
       alias: {
-        "@": "/src",
+        "~": "/src",
       },
     },
     ssr: {

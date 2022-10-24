@@ -1,12 +1,16 @@
 ---
-import AstroTopFrameWorksCircle from "@/components/AstroTopFrameWorksCircle.astro";
-import Container from "@/components/Container.astro";
-import Gap from "@/components/Gap.astro";
-import HMFLayout from "@/layouts/HMFLayout.astro";
+import AstroTemplateOutlet from "~/components/AstroTemplateOutlet.astro";
+import AstroTopFrameWorksCircle from "~/components/AstroTopFrameWorksCircle.astro";
+import Center from "~/components/Center.astro";
+import Container from "~/components/Container.astro";
+import Gap from "~/components/Gap.astro";
+import HMFLayout from "~/layouts/HMFLayout.astro";
 ---
 
 <HMFLayout title="Home">
   <Container slot="header">
+    <AstroTemplateOutlet templateName="centered-content" />
+
     <h1>This is the astro template</h1>
 
     <Gap spaces={3} />
@@ -46,3 +50,8 @@ import HMFLayout from "@/layouts/HMFLayout.astro";
     </div>
   </Container>
 </HMFLayout>
+<template name="centered-content">
+  <Center widthClass={"w-4/5"} flexClasses={"flex "}>
+    I'm from the center component
+  </Center>
+</template>

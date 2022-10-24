@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import useSideBarStore from "@/stores/useSideBarStore";
-import { NavLinks } from "@/types";
+import useSideBarStore from "~/stores/useSideBarStore";
+import { NavLinks } from "~/types";
 
 const { isShown, setIsShownToFalse } = useSideBarStore();
 

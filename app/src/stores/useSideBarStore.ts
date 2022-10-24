@@ -1,4 +1,4 @@
-import useBoolean from "@/composables/useBoolean"
+import useBoolean from "~/composables/useBoolean"
 import { createGlobalState } from "@vueuse/core"
 
 

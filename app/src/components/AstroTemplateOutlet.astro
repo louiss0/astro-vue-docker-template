@@ -1,0 +1,39 @@
+---
+interface Props {
+  templateName: string;
+}
+
+const { templateName } = Astro.props;
+---
+
+<div data-template-name={templateName}></div>
+
+<script>
+  {
+    const templateOutlets = document.body.querySelectorAll(
+      "[data-template-name]"
+    );
+
+    const templates =
+      document.querySelectorAll<HTMLTemplateElement>("template[name]");
+
+    templateOutlets.forEach((templateOutlet) => {
+      const templateOutletName =
+        templateOutlet.getAttribute("data-template-name")!;
+
+      const template = Array.from(templates).find(
+        (template) => template.getAttribute("name") === templateOutletName
+      );
+
+      if (!template) {
+        throw new Error(
+          `There is no template with name ${templateOutletName} please give a template a name`
+        );
+      }
+
+      templateOutlet.appendChild(template.content.cloneNode(true));
+
+      templateOutlet.setAttribute("id", `${templateOutletName}template-outlet`);
+    });
+  }
+</script>

@@ -1,15 +1,27 @@
 <script lang="tsx" setup>
-import useSideBarStore from "@/stores/useSideBarStore";
-import { NavLinks } from "@/types";
+import { onMounted } from "vue";
+import useSideBarStore from "~/stores/useSideBarStore";
+import { NavLinks } from "~/types";
 import LightDarkSwitch from "./LightDarkSwitch.vue";
 import Sidebar from "./Sidebar.vue";
-
+import { useToast } from "primevue/usetoast";
+import { ToastSeverity } from "primevue/api";
 const { setIsShownToTrue } = useSideBarStore();
-
 const links: ReadonlyArray<NavLinks> = [{ path: "/", text: "Home" }];
-</script>
 
+const toast = useToast();
+
+onMounted(() => {
+  toast.add({
+    severity: ToastSeverity.SUCCESS,
+    summary: "Project is ready",
+    detail: "Time to use prime vue to reach success",
+    life: 550,
+  });
+});
+</script>
 <template>
+  <Toast />
   <nav class="bg-blue-600 dark:bg-blue-300 text-gray-50 dark:text-gray-900">
     <div class="w-5/6 max-w-screen-xl">
       <div data-padding-layer class="py-2 px-6">
