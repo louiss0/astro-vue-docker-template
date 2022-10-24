@@ -12,6 +12,27 @@ I discovered that every time you download something new you need to then kill th
 I created this template because I don't like to download the node installer at all. But Other that that there are quite a few topics to cover.
 
 
+## Using the Project 
+
+To activate the server use 
+
+```
+docker-compose up -d server
+```
+
+To create a preview of the site
+```
+docker-compose up -d preview
+```
+
+To install packages 
+
+```
+docker-compose run --rm npm i ==package name==
+```
+
+
+
 ## Sections 
 
 [Project Folder Structure](#project-folder-structure)
