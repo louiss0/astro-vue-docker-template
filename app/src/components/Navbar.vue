@@ -1,13 +1,13 @@
 <script lang="tsx" setup>
 import { onMounted } from "vue";
-import useSideBarStore from "~/stores/useSideBarStore";
 import { NavLinks } from "~/types";
 import LightDarkSwitch from "./LightDarkSwitch.vue";
-import Sidebar from "./Sidebar.vue";
 import { useToast } from "primevue/usetoast";
 import { ToastSeverity } from "primevue/api";
-const { setIsShownToTrue } = useSideBarStore();
+import useBoolean from "~/composables/useBoolean";
 const links: ReadonlyArray<NavLinks> = [{ path: "/", text: "Home" }];
+
+const [showSideBar, openSidebar, closeSidebar] = useBoolean();
 
 const toast = useToast();
 
@@ -26,7 +26,7 @@ onMounted(() => {
     <div class="w-5/6 max-w-screen-xl">
       <div data-padding-layer class="py-2 px-6">
         <div data-content-layer class="flex justify-around">
-          <div data-hamburger-menu @click="setIsShownToTrue">
+          <div data-hamburger-menu @click="openSidebar">
             <HambugerIcon />
           </div>
           <div class="w-2/5 lg:w-4/5">
@@ -47,8 +47,21 @@ onMounted(() => {
       </div>
     </div>
   </nav>
-
-  <Sidebar :links="links" />
+  <Sidebar
+    @hide="closeSidebar"
+    position="left"
+    class="p-sidebar-md"
+    :visible="showSideBar"
+  >
+    <ul class="w-full px-4 py-12 text-lg">
+      <li
+        v-for="{ path, text } in links"
+        class="hover:bg-blue-400 dark:hover:bg-blue-600"
+      >
+        <a :href="path">{{ text }}</a>
+      </li>
+    </ul>
+  </Sidebar>
 </template>
 
 <script lang="tsx">

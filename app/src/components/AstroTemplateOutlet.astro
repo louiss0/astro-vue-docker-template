@@ -6,7 +6,7 @@ interface Props {
 const { templateName } = Astro.props;
 ---
 
-<div data-template-name={templateName}></div>
+<br data-template-name={templateName} />
 
 <script>
   {
@@ -31,9 +31,7 @@ const { templateName } = Astro.props;
         );
       }
 
-      templateOutlet.appendChild(template.content.cloneNode(true));
-
-      templateOutlet.setAttribute("id", `${templateOutletName}template-outlet`);
+      templateOutlet.replaceWith(template.content.cloneNode(true));
     });
   }
 </script>
