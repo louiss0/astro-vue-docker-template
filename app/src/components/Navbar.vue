@@ -1,14 +1,12 @@
 <script lang="tsx" setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { NavLinks } from "~/types";
 import LightDarkSwitch from "./LightDarkSwitch.vue";
 import { useToast } from "primevue/usetoast";
 import { ToastSeverity } from "primevue/api";
-import useBoolean from "~/composables/useBoolean";
 const links: ReadonlyArray<NavLinks> = [{ path: "/", text: "Home" }];
 
-const [showSideBar, openSidebar, closeSidebar] = useBoolean();
-
+const showSideBar = ref(false);
 const toast = useToast();
 
 onMounted(() => {
@@ -26,7 +24,7 @@ onMounted(() => {
     <div class="w-5/6 max-w-screen-xl">
       <div data-padding-layer class="py-2 px-6">
         <div data-content-layer class="flex justify-around">
-          <div data-hamburger-menu @click="openSidebar">
+          <div data-hamburger-menu @click="showSideBar = true">
             <HambugerIcon />
           </div>
           <div class="w-2/5 lg:w-4/5">
@@ -47,12 +45,7 @@ onMounted(() => {
       </div>
     </div>
   </nav>
-  <Sidebar
-    @hide="closeSidebar"
-    position="left"
-    class="p-sidebar-md"
-    :visible="showSideBar"
-  >
+  <Sidebar position="left" class="" v-model:visible="showSideBar">
     <ul class="w-full px-4 py-12 text-lg">
       <li
         v-for="{ path, text } in links"
