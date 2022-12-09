@@ -6,6 +6,10 @@ import Container from "~/components/Container.astro";
 import Gap from "astro-gap";
 import HMFLayout from "~/layouts/HMFLayout.astro";
 import Button from "~/components/Button.vue";
+
+
+const frameworkChoices = ["React", "Vue", "Angular", "Svelte", "Solid"]
+
 ---
 
 <HMFLayout title="Home">
@@ -15,6 +19,7 @@ import Button from "~/components/Button.vue";
     <h1>This is the astro template</h1>
 
     <Gap spaces={3} />
+
     <p>
       This template is designed with the TailwindCSS intergration. Vue installed
       and has a few basic utility components to use. The styles will be found in
@@ -23,7 +28,8 @@ import Button from "~/components/Button.vue";
       <br />
       Go to the readme for more information.
     </p>
-    <Button label="This button comes from prime vue" />
+    
+    <Button label="This button comes from prime vue"  />
 
     <div class="text-xl text-red-400">
       Please remember to use the containers with the slot's provided for content
@@ -32,17 +38,14 @@ import Button from "~/components/Button.vue";
 
   <Container>
     <p>
+      The logo on the footer is a representation of five framework logos.  
       If you want to either remove or add a framework go to the HMFLayout in
       order to change the component framework.
     </p>
     <strong>Your options are.</strong>
 
     <ul class="grid gap-2" role="list">
-      <li>React</li>
-      <li>Vue</li>
-      <li>Angular</li>
-      <li>Svelte</li>
-      <li>Solid</li>
+      {frameworkChoices.map((choice)=> <li>{choice}</li> )}
     </ul>
   </Container>
 

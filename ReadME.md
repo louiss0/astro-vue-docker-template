@@ -1,35 +1,25 @@
-# Astro Docker Template
+# Astro Vue Base Template
 
-git
+This is the Astro vue Template that I use for my projects. The only page is the index html page.
 
-This template is a template that contains two main folders the app folder and the dockerfile.
+Tailwind css is the CSS tool that I use for styling. Vue is the Component Renderer that I use for interactivity.
 
-Astro is used as my static site generator. Vue is the Ui framework of choice. Tailwind css is the framework of choice.
-I use two remark plugins in my code
-The configuration is important. **Warning!** don't use `npm` over `pnpm`. You wont be able to to use volumes at all
-Symlinks can't be transferred from one file to another and pnpm will slow things down a lot you don't want that.
+I use primevue as my UI framework that works with vue. The configuration for each vue instance is found in the bootstrap folder. When it comes to components I just put them in the components folder. This template also uses `postcss-nesting` as it's nesting library for CSS. There are two packages that come with this template that will help `astro-gap` and `astro-template-outlet`. Astro Gap is good for creating spaces between elements. Astro Template Outlet is good for rendering template content.
 
-I discovered that every time you download something new you need to then kill the image and start all over again to me this is not productive.
-I created this template because I don't like to download the node installer at all. But Other that that there are quite a few topics to cover.
+This template also comes with `astro-icon` a library that is used for rendering icons. go to [icones](https://icones.js.org/) to find names for astro icon.
 
 ## Using the Project
 
-To activate the server use
+To activate the server use.
 
 ```
-docker-compose up -d server
+p?npm start
 ```
 
-To create a preview of the site
+To create a preview of the site.
 
 ```
-docker-compose up -d preview
-```
-
-To install packages
-
-```
-docker-compose run --rm npm i ==package name==
+p?npm preview
 ```
 
 ## Sections
@@ -38,24 +28,21 @@ docker-compose run --rm npm i ==package name==
 
 [Config Files](#config-files)
 
+[Bootstrapping the Application](#bootstrapping-the-application)
+
 [Rules Regarding Projects](#rules-regarding-projects)
 
 ## [Project Folder Structure](#sections)
 
 ```
-    app---src---|___layouts
-                |___bootstrap
-                |___components
-                |___composables
-                |___components
-                |___stores
-                |___types
-
-    dockerfiles---|
-                  |___npm.dockerfile
-                  |___preview.dockerfile
-                  |___astro.dockerfile
-                  |___server.dockerfile
+app__src
+        |___layouts
+        |___bootstrap
+        |___components
+        |___composables
+        |___components
+        |___stores
+        |___types
 
 ```
 
@@ -73,12 +60,21 @@ There are three config files that are very important to keep the way they are.
 {
 darkMode: "class",
 content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+safelist: [
+    "hidden",
+    "fixed",
+    "translate-x-full",
+    "translate-y-full",
+    "opacity-0",
+  ],
 }
 ```
 
 - The `darkMode:"class"` is used to enable the use of dark mode for most classes
 
 - The `content:` allows tailwind to search for all files with classes in them in order to write them to the style sheet
+
+- The `safelist:` is there so that these classes will be compiled in the final build. In most projects you will inevitably have to add or remove classes based on whether or not an element should appear or disappear. THese classes are the classses that will not be applied at first but will be when when a user clicks on a button to make something interactive.
 
 ### Astro Config
 
@@ -98,13 +94,8 @@ export default defineConfig({
   },
   vite: {
     plugins: [],
-    resolve: {
-      alias: {
-        "~": "/src",
-      },
-    },
     ssr: {
-      external: ["svgo"],
+      external: ["primevue"],
     },
     server: {
       watch: {
@@ -115,6 +106,14 @@ export default defineConfig({
 });
 ```
 
+- The `appEntrypoint:` `"/src/bootstrap"` references the index file where I put the function that is supposed to be exported so that vue can be used.
+
+- `enableObjectSlotsTrue:` allows me to be able to use [object slots](https://vuejs.org/guide/extras/render-function.html#rendering-slots)
+
+- The `external:` array prevents primevue from being compiled into the server build for vite.
+
+- The `usePolling:` allows the server to be run when using docker.
+
 ### Ts Config
 
 ```
@@ -123,15 +122,33 @@ export default defineConfig({
     "~/*": ["./src/*"],
 }
 
+```
+
+The `baseURL:` is a reference to the root folder.
+The `paths` object is used to tell typescript what to use as an alias for a certain file.
+
+I decided to use this `"~/*": ["./src/*"],`. This makes to so that all I have to do is refer to the src folder and I can import and file I want from anywhere.
+
+### PostCSS Config
+
+```
+module.exports = {
+  plugins: {
+    "tailwindcss/nesting": {},
+    tailwindcss: {},
+  },
+};
 
 ```
 
-### Bootstrapping the application
+This configuration is required by tailwind to tell postcss to run the nesting plugin before tailwind
 
-The bootstrap folder contains the global components folder and the global config file. This folder is a necessary part of building any ui with vue. Don't get rid of it. Global vue components go in the components file. Global Configurations got in the config file. The index.js file is the entry point for file in the app. When you create a astro island you are creating a new app instance. Each app instance will get access to the plugins that are registered in the index.js file. The bootstrap folder can be used to register any other things you need in your app like directives. The base layout is the one that uses global styling and sets up the global scripts that you need for the app. I use `@fontsource` for my fonts. I use prime vue as my primary ui library. The css in those files are imported into the global stylsheet file. Tailwind is used throughout the app due to the astro tailwind integration
+### [Bootstrapping the application](#sections)
 
-These two setting are very important the `"."` refers to the folder that the tsconfig is in.
-The paths stops typescript from throwing an error when I use `"~"` to refer to the src file.
+The application relies on the `bootstrap/` folder to plan out how vue is used. When it comes to styling [Tailwind](https://tailwindcss.com/) is used
+
+I created two layouts the BaseLayout and the HMFLayout. The BaseLayout is a layout that is used to set up all of the necessary styles and scripts for each page.
+The HMFLayout is the one that should be used for most situations except when you don't need the navbar.
 
 ## [Rules Regarding Projects](#sections)
 

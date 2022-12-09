@@ -18,11 +18,6 @@ export default defineConfig({
     host: true,
   },
   vite: {
-    resolve: {
-      alias: {
-        "~": "/src",
-      },
-    },
     ssr: {
       noExternal: ["primevue"],
     },

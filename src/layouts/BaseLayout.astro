@@ -100,10 +100,10 @@ const { title } = Astro.props;
           @apply dark:bg-gray-200 dark:text-gray-800;
           @apply border-2 border-current;
           @apply px-6 py-2;
-        }
-
-        .p-button:enabled:hover {
-          @apply bg-gray-200 text-gray-800 border-current;
+          
+          &:enabled:hover {
+            @apply bg-gray-200 text-gray-800 border-current;
+          }
         }
       </style>
       <title>{title}</title>

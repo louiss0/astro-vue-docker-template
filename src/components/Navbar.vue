@@ -11,10 +11,10 @@ const showSideBar = ref(false);
   <nav class="bg-blue-600 dark:bg-blue-300 text-gray-50 dark:text-gray-900">
     <div class="w-5/6 max-w-screen-xl">
       <div data-padding-layer class="py-2 px-6">
-        <div data-content-layer class="flex justify-around">
-          <div data-hamburger-menu @click="showSideBar = true">
+        <div data-content class="flex justify-around">
+          <button data-hamburger-menu @click="showSideBar = true">
             <HambugerIcon />
-          </div>
+          </button>
           <div class="w-2/5 lg:w-4/5">
             <div data-padding-layer class="py-2 px-6">
               <ul data-content-layer class="flex gap-4 items-center">
@@ -34,14 +34,13 @@ const showSideBar = ref(false);
     </div>
   </nav>
   <Sidebar position="left" class="" v-model:visible="showSideBar">
-    <ul class="w-full px-4 py-12 text-lg">
-      <li
-        v-for="{ path, text } in links"
-        class="hover:bg-blue-400 dark:hover:bg-blue-600"
-      >
-        <a :href="path">{{ text }}</a>
-      </li>
-    </ul>
+    <div class="w-full px-4 py-12 text-lg">
+      <template v-for="{ path, text } in links">
+        <a :href="path" class="hover:bg-blue-400 dark:hover:bg-blue-600">
+          {{ text }}
+        </a>
+      </template>
+    </div>
   </Sidebar>
 </template>
 
