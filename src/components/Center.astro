@@ -6,7 +6,7 @@ type AllowedFlexClasses =
   | "justify-around"
   | "justify-evenly"
   | "justify-center";
-
+``;
 interface Props {
   widthClass?: `w-${FluidPercentages}`;
   gap?: `gap-${SpacingNumbers}`;
@@ -18,7 +18,7 @@ const { widthClass, gap = "gap-4", flexClasses } = Astro.props;
 
 <div
   class:list={[
-    "grid place-items-center",
+    flexClasses?.substring(5) ? "grid place-items-center" : null,
     widthClass || "",
     gap,
     flexClasses,

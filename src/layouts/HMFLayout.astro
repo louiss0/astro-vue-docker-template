@@ -12,11 +12,13 @@ const { title } = Astro.props;
 
 <BaseLayout title={title}>
   <header>
-    <Navbar client:idle />
+    <Navbar client:load />
     <slot name="header" />
   </header>
   <main>
-    <slot />
+    <div class="dark:bg-gray-900 dark:text-gray-50">
+      <slot />
+    </div>
   </main>
   <footer>
     <slot name="footer" />

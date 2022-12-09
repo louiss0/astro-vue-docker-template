@@ -9,13 +9,13 @@ const toggle = useToggle(isDark);
   <button data-element="light-dark-switch" @click="toggle()">
     <div class="transition-opacity duration-500 ease-in hover:opacity-80">
       <div data-padding-layer class="py-1 px-3">
-        <div data-content-layer class="grid place-items-center">
+        <div data-content class="grid place-items-center">
           <Transition
-            enter-active-class="transform transition-transform duration-300 ease-in-out"
-            leave-active-class="transform transition-transform duration-600 ease-in-out"
             enter-from-class="scale-25"
-            leave-to-class="scale-0"
+            enter-active-class="transform transition-transform duration-300 ease-in-out"
             enter-to-class="scale-100"
+            leave-active-class="transform transition-transform duration-600 ease-in-out"
+            leave-to-class="scale-0"
             mode="out-in"
             :duration="900"
           >

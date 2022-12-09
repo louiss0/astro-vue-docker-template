@@ -23,63 +23,67 @@ const { revealedFrameworks } = Astro.props;
 
   <!-- Icons area -->
   <div
-    data-top-icon
+    id="top-icon"
     class="absolute z-20 -top-3 left-1/2 transform -translate-x-1/2"
   >
     {
-      revealedFrameworks.includes("react") && (
+      revealedFrameworks.includes("react") ? (
         <div class="transform transition-transform duration-200 ease-in hover:scale-125">
           <Icon name="logos:react" class="w-6" />
         </div>
-      )
+        )
+        : null
     }
   </div>
   <div
-    data-top-right-icon
+    id="top-right-icon"
     class="absolute z-20 top-1/4 -right-3 transform -translate-y-1/2"
   >
     {
-      revealedFrameworks.includes("angular") && (
+      revealedFrameworks.includes("angular") ? (
         <div class="transform transition-transform duration-200 ease-in hover:scale-125">
           <Icon name="logos:angular-icon" class="w-6" />
         </div>
-      )
+        )
+        : null
     }
   </div>
   <div
-    data-top-left-icon
+    id="top-left-icon"
     class="absolute z-20 top-1/4 -left-3 transform -translate-y-1/2"
   >
     {
-      revealedFrameworks.includes("vue") && (
+      revealedFrameworks.includes("vue") ? (
         <div class="transform transition-transform duration-200 ease-in hover:scale-125">
           <Icon name="logos:vue" class="w-6" />
         </div>
-      )
+      ): null
     }
   </div>
   <div
-    data-bottom-left-icon
+    id="bottom-left-icon"
     class="absolute z-20 bottom-1/4 -left-3 transform translate-y-1/2"
   >
     {
-      revealedFrameworks.includes("svelte") && (
+      revealedFrameworks.includes("svelte") ? (
         <div class="transform transition-transform duration-200 ease-in hover:scale-125">
           <Icon name="logos:svelte-icon" class="w-6" />
         </div>
-      )
+        )
+        : null
     }
   </div>
   <div
-    data-bottom-right-icon
+    id="bottom-right-icon"
     class="absolute z-20 bottom-1/4 -right-3 transform translate-y-1/2"
   >
     {
-      revealedFrameworks.includes("solid") && (
+      revealedFrameworks.includes("solid") ? (
         <div class="transform transition-transform duration-200 ease-in hover:scale-125">
           <Icon name="logos:solidjs-icon" class="w-6" />
         </div>
-      )
+        )
+        : null
     }
   </div>
 
@@ -89,7 +93,7 @@ const { revealedFrameworks } = Astro.props;
       data-transition-layer
       class="transition-opacity duration-300 ease-in hover:opacity-80"
     >
-      <div data-circle-layer class="rounded-full bg-purple-700">
+      <div id="backgroound-circle" class="rounded-full bg-purple-700">
         <div data-padding-layer class="p-2">
           <Icon name="vscode-icons:file-type-astro" class="w-full h-full" />
         </div>

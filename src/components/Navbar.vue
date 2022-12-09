@@ -1,22 +1,10 @@
 <script lang="tsx" setup>
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { NavLinks } from "~/types";
 import LightDarkSwitch from "./LightDarkSwitch.vue";
-import { useToast } from "primevue/usetoast";
-import { ToastSeverity } from "primevue/api";
 const links: ReadonlyArray<NavLinks> = [{ path: "/", text: "Home" }];
 
 const showSideBar = ref(false);
-const toast = useToast();
-
-onMounted(() => {
-  toast.add({
-    severity: ToastSeverity.SUCCESS,
-    summary: "Project is ready",
-    detail: "Time to use prime vue to reach success",
-    life: 550,
-  });
-});
 </script>
 <template>
   <Toast />

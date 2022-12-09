@@ -1,7 +1,6 @@
 import { App } from "vue";
-import components from "./components";
 import config from "./config";
-
+import {components} from "./components"
 
 export default (app: App) => { 
     
@@ -13,9 +12,8 @@ export default (app: App) => {
     }
     
     for (const [key, value] of Object.entries(components)) {
-
-
-        app.component(key, value)
+        
+        app.component(key, value)   
     }
     
     

@@ -8,7 +8,6 @@ module.exports = {
     "translate-x-full",
     "translate-y-full",
     "opacity-0",
-    "text-red-400",
   ],
   plugins: [],
 };

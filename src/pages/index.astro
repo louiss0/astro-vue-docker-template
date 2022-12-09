@@ -1,15 +1,16 @@
 ---
-import AstroTemplateOutlet from "~/components/AstroTemplateOutlet.astro";
+import AstroTemplateOutlet from "astro-template-outlet";
 import AstroTopFrameWorksCircle from "~/components/AstroTopFrameWorksCircle.astro";
 import Center from "~/components/Center.astro";
 import Container from "~/components/Container.astro";
-import Gap from "~/components/Gap.astro";
+import Gap from "astro-gap";
 import HMFLayout from "~/layouts/HMFLayout.astro";
+import Button from "~/components/Button.vue";
 ---
 
 <HMFLayout title="Home">
   <Container slot="header">
-    <AstroTemplateOutlet templateName="centered-content" />
+    <AstroTemplateOutlet templateId="centered-content" />
 
     <h1>This is the astro template</h1>
 
@@ -22,13 +23,14 @@ import HMFLayout from "~/layouts/HMFLayout.astro";
       <br />
       Go to the readme for more information.
     </p>
+    <Button label="This button comes from prime vue" />
 
     <div class="text-xl text-red-400">
       Please remember to use the containers with the slot's provided for content
     </div>
   </Container>
 
-  <Container slot="main">
+  <Container>
     <p>
       If you want to either remove or add a framework go to the HMFLayout in
       order to change the component framework.
@@ -50,7 +52,8 @@ import HMFLayout from "~/layouts/HMFLayout.astro";
     </div>
   </Container>
 </HMFLayout>
-<template name="centered-content">
+
+<template id="centered-content">
   <Center widthClass={"w-4/5"} flexClasses={"flex "}>
     I'm from the center component
   </Center>
